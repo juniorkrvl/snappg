@@ -1,0 +1,42 @@
+﻿{
+  "database": {
+    "server": "localhost",
+    "name": "btfit_new_dev",
+    "user": "root",
+    "password": "cinetsql",
+    "provider": "MySql.Data.MySqlClient"
+  },
+  "entities": {
+    "path": "C:\\Projects\\btfit-new\\BTFIT.AutoTraining.Dapper\\Entities",
+    "namespace": "BTFIT.AutoTraining.Repository.Dapper.Entities",
+    "project": "C:\\Projects\\btfit-new\\BTFIT.AutoTraining.Dapper\\BTFIT.AutoTraining.Repository.Dapper.csproj",
+    "ignores": [
+      "ALG_TemplatesNaoElegiveisporAnamnese",
+      "ALG_TemplatesSelecionados",
+      "Cardio_SelTemp",
+      "DATABASECHANGELOG",
+      "DATABASECHANGELOGLOCK",
+      "Exercicios_SelTemp",
+      "TbAlongamento",
+      "TbAlongGrupMusc"
+    ]
+  },
+  "pocos": {
+    "imports": ["System","System.Collections.Generic","System.ComponentModel.DataAnnotations"],
+    "sulfix": "",
+    "prefix": "",
+    "attributes": {
+      "pk": "[Key]",
+      "fk": "",
+      "table": [ "[PetaPoco.TableName(\"@name@\")]", "[PetaPoco.PrimaryKey(\"@pkcolumns@\")]" ],
+      "columns": "",
+      "oneToOneRelations": "",
+      "oneToManyRelations": ""
+    },
+    "relations": {
+      "oneToOne": true,
+      "oneToMany": true
+    }
+  }
+
+}
