@@ -1,41 +1,32 @@
 ﻿{
   "database": {
-    "server": "localhost",
-    "name": "btfit_new_dev",
-    "user": "root",
-    "password": "cinetsql",
-    "provider": "MySql.Data.MySqlClient"
+    "server": "IP of your server",
+    "name": "name of database",
+    "user": "user",
+    "password": "pass",
+    "provider": "provider" //Example: MySql.Data.MySqlClient
   },
   "entities": {
-    "path": "C:\\Projects\\btfit-new\\BTFIT.AutoTraining.Dapper\\Entities",
-    "namespace": "BTFIT.AutoTraining.Repository.Dapper.Entities",
-    "project": "C:\\Projects\\btfit-new\\BTFIT.AutoTraining.Dapper\\BTFIT.AutoTraining.Repository.Dapper.csproj",
-    "ignores": [
-      "ALG_TemplatesNaoElegiveisporAnamnese",
-      "ALG_TemplatesSelecionados",
-      "Cardio_SelTemp",
-      "DATABASECHANGELOG",
-      "DATABASECHANGELOGLOCK",
-      "Exercicios_SelTemp",
-      "TbAlongamento",
-      "TbAlongGrupMusc"
-    ]
+    "path": "Path to save your poco files",
+    "namespace": "Namespace of your poco files",
+    "project": "Path to your CSharp or VB project", //Example: C:\\Projects\Anything\Anything.csproj
+    "ignores": [ "" ] // Array of string with name of tables that must be ignored
   },
   "pocos": {
-    "imports": ["System","System.Collections.Generic","System.ComponentModel.DataAnnotations"],
-    "sulfix": "",
-    "prefix": "",
+    "imports": [ "Array of string names of imports statements" ], //Ex: System, System.IO, System.Data
+    "sulfix": "Sulfix of your poco files",
+    "prefix": "Prefix of your poco files",
     "attributes": {
-      "pk": "[Key]",
-      "fk": "",
-      "table": [ "[PetaPoco.TableName(\"@name@\")]", "[PetaPoco.PrimaryKey(\"@pkcolumns@\")]" ],
-      "columns": "",
-      "oneToOneRelations": "",
-      "oneToManyRelations": ""
+      "pk": ["Atributes of properties that indicates a PrimaryKey Column"], //Ex: [Key] or [PrimaryKey]
+      "fk": ["Atributes of properties that indicates a ForeignKey Column"], //Ex: [FK] or [ForeignKey]
+      "table": ["Atributes of class"],
+      "columns": "Atributes of all properties",
+      "oneToOneRelations": "Atributes of objects that represents one to one relationship",
+      "oneToManyRelations": "Atributes of objects that represents one to many relationship"
     },
     "relations": {
-      "oneToOne": true,
-      "oneToMany": true
+      "oneToOne": true, // indicates true to create relation one-to-one and false to ignore.
+      "oneToMany": true // indicates true to create relation one-to-many and false to ignore.
     }
   }
 
