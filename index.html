@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Snappg : SnapPocoGenerator is a tool for generating poco for many scenarios and databases.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Snappg</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/juniorkrvl/snappg">View on GitHub</a>
+
+          <h1 id="project_title">Snappg</h1>
+          <h2 id="project_tagline">SnapPocoGenerator is a tool for generating poco for many scenarios and databases.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/juniorkrvl/snappg/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/juniorkrvl/snappg/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features.</h3>
+
+<p>Snappg is a .exe program that uses one simple config file to generate your pocos and include them automatically into your VB or CSharp project.</p>
+
+<h3>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h3>
+
+<p>First of all, you need to install Snappg in your Windows. You can download a package here or clone the repository and build for your own. After install, you'll need to put the path of snappg.exe into windows environment variables. (If you install from package installer, you get it automatically). </p>
+
+<p>After install and configure, you are ready to go!</p>
+
+<h3>
+<a id="snappg-commands" class="anchor" href="#snappg-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Snappg Commands</h3>
+
+<h4>
+<a id="snappg-init" class="anchor" href="#snappg-init" aria-hidden="true"><span class="octicon octicon-link"></span></a>Snappg Init</h4>
+
+<p>The first command you will need to use is init. Go to your main project folder and type:</p>
+
+<pre><code>snappg init
+</code></pre>
+
+<p>This command will create and <strong>snappg-config.json</strong> file.</p>
+
+<h4>
+<a id="snappg-update" class="anchor" href="#snappg-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>Snappg Update</h4>
+
+<p>After snappg-config.json file be ready and properly configured, type:</p>
+
+<pre><code>snappg update
+</code></pre>
+
+<p>To create/update your pocos.</p>
+
+<h4>
+<a id="snappg-clean" class="anchor" href="#snappg-clean" aria-hidden="true"><span class="octicon octicon-link"></span></a>Snappg Clean</h4>
+
+<p>Type:</p>
+
+<pre><code>snappg clean
+</code></pre>
+
+<p>To clean your poco files.</p>
+
+<h3>
+<a id="snappg-configuration" class="anchor" href="#snappg-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Snappg Configuration</h3>
+
+<p>This <strong>snappg-config.json</strong> file is the core of snappg. Here you will be able to configure every detail of the generation of your project POCO files.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>database<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>server<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>127.0.0.1<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>database_name<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>database_user<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>database_password<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>provider<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>MySql.Data.MySqlClient<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-s"><span class="pl-pds">"</span>entities<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Projects<span class="pl-cce">\\</span>ExampleProj<span class="pl-cce">\\</span>Entities<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>namespace<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ExampleProj.Entities<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>project<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Projects<span class="pl-cce">\\</span>ExampleProj<span class="pl-cce">\\</span>Entities<span class="pl-cce">\\</span>ExampleProj.csproj<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ignores<span class="pl-pds">"</span></span>: [
+      <span class="pl-s"><span class="pl-pds">"</span>User<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>Products<span class="pl-pds">"</span></span>
+    ]
+  },
+  <span class="pl-s"><span class="pl-pds">"</span>pocos<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>imports<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>System<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>System.Collections.Generic<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>System.ComponentModel.DataAnnotations<span class="pl-pds">"</span></span>],
+    <span class="pl-s"><span class="pl-pds">"</span>sulfix<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Poco<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>prefix<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Tb<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>[Key]<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[TableName(<span class="pl-cce">\"</span>@name@<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>oneToOneRelations<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>oneToManyRelations<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>relations<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>oneToOne<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>oneToMany<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+    }
+  }
+
+}</pre></div>
+
+<h4>
+<a id="database-configuration" class="anchor" href="#database-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database Configuration</h4>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>database<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>server<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>127.0.0.1<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>database_name<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>database_user<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>database_password<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>provider<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>MySql.Data.MySqlClient<span class="pl-pds">"</span></span>
+  }</pre></div>
+
+<p>In this block, you will configure all database informations. For provider option, you can choose between 'MySql.Data.MySqlClient' for MySql or 'System.Data.SqlClient' for SQL Server for now.</p>
+
+<h4>
+<a id="entities-configuration" class="anchor" href="#entities-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Entities Configuration</h4>
+
+<div class="highlight highlight-source-json"><pre> <span class="pl-s"><span class="pl-pds">"</span>entities<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Projects<span class="pl-cce">\\</span>ExampleProj<span class="pl-cce">\\</span>Entities<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>namespace<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ExampleProj.Entities<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>project<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Projects<span class="pl-cce">\\</span>ExampleProj<span class="pl-cce">\\</span>Entities<span class="pl-cce">\\</span>ExampleProj.csproj<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ignores<span class="pl-pds">"</span></span>: [
+      <span class="pl-s"><span class="pl-pds">"</span>User<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>Products<span class="pl-pds">"</span></span>
+    ]
+  }</pre></div>
+
+<p><strong>Path</strong>: Path to save your generated files
+<strong>Namespace</strong>: Namespace of genereted classes
+<strong>Project</strong>: Path to .csproj file. This option is for inserting files into your project file automatically. With this, you will not need to add manually through the menu &gt; 'Include In Project'
+<strong>Ignores</strong>: Here you place an array of string with the names of the tables that will not use. Snappg will ignore these tables and if you have previously generated, they will be erased.</p>
+
+<h4>
+<a id="pocos-configuration" class="anchor" href="#pocos-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pocos Configuration</h4>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>pocos<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>imports<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>System<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>System.Collections.Generic<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>System.ComponentModel.DataAnnotations<span class="pl-pds">"</span></span>],
+    <span class="pl-s"><span class="pl-pds">"</span>sulfix<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Poco<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>prefix<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Tb<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>[Key]<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [ <span class="pl-s"><span class="pl-pds">"</span>[PetaPoco.TableName(<span class="pl-cce">\"</span>@name@<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>[PetaPoco.PrimaryKey(<span class="pl-cce">\"</span>@pkcolumns@<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span> ],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>oneToOneRelations<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>oneToManyRelations<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>relations<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>oneToOne<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>oneToMany<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+    }
+  }</pre></div>
+
+<p>Here you put the details of your files.</p>
+
+<p><strong>Sulfix</strong>: Place a sulfix to table name into POCO class name. Example: Table-&gt; User, Class-&gt; UserPoco
+<strong>Prefix</strong>: Place a prefix to table name into POCO class name. Example: Table-&gt; User, Class-&gt; TbUser</p>
+
+<h5>
+<a id="attributes-configuration" class="anchor" href="#attributes-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes Configuration</h5>
+
+<p><strong>PK</strong>: This you put an array of strings indicating attributes you want to properties that represents PrimaryKeys.
+Example:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">User</span>{
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>Snappg was designed by <a href="https://github.com/juniorkrvl" class="user-mention">@juniorkrvl</a> in order to simplify the generation of POCO's for any kind of project.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Snappg maintained by <a href="https://github.com/juniorkrvl">juniorkrvl</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
