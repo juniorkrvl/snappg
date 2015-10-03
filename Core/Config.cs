@@ -42,11 +42,9 @@ namespace Snappg.Core
 
     public class Attributes
     {
-        public string PK { get; set; }
-        public string FK { get; set; }
+        public string[] PK { get; set; }
+        public string[] FK { get; set; }
         public string[] Table { get; set; }
-        public string OneToOneRelations { get; set; }
-        public string OneToManyRelations { get; set; }
     }
 
     public class Relations

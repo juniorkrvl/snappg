@@ -21,14 +21,19 @@ namespace KeenOrm.Test
                         break;
                     case "clean":
                         break;
+                    case "init":
+                        Application.Initialize();
+                        break;
                     default:
                         break;
                 }
 
             }
 
+#if DEBUG
             Console.ReadKey();
-           
+#endif
+
         }
 
     
