@@ -157,10 +157,10 @@
     <span class="pl-s"><span class="pl-pds">"</span>sulfix<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Poco<span class="pl-pds">"</span></span>,
     <span class="pl-s"><span class="pl-pds">"</span>prefix<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Tb<span class="pl-pds">"</span></span>,
     <span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
-      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>[Key]<span class="pl-pds">"</span></span>,
-      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
-      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [ <span class="pl-s"><span class="pl-pds">"</span>[PetaPoco.TableName(<span class="pl-cce">\"</span>@name@<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>[PetaPoco.PrimaryKey(<span class="pl-cce">\"</span>@pkcolumns@<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span> ],
-      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[Key]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[ForeignKey]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[Table]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[Column]<span class="pl-pds">"</span></span>],
       <span class="pl-s"><span class="pl-pds">"</span>oneToOneRelations<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
       <span class="pl-s"><span class="pl-pds">"</span>oneToManyRelations<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
     },
@@ -178,11 +178,40 @@
 <h5>
 <a id="attributes-configuration" class="anchor" href="#attributes-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes Configuration</h5>
 
-<p><strong>PK</strong>: This you put an array of strings indicating attributes you want to properties that represents PrimaryKeys.
-Example:</p>
+<p><strong>PK</strong>: Here you place an array of strings that indicates the attributes that you want the properties representing PrimaryKeys should have.</p>
+
+<p>Example:</p>
 
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">User</span>{
+    [Key]
     <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<p><strong>FK</strong>: Here you place an array of strings that indicates the attributes that you want the properties representing ForeignKeys should have.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">ProductItem</span>{
+    [Key]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    [ForeignKey]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<p><strong>Columns</strong>: Here you place an array of strings that indicates the attributes that all properties should have.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">ProductItem</span>{
+    [Key]
+    [Column]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    [ForeignKey]
+    [Column]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    [Column]
     <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
 }</pre></div>
 
