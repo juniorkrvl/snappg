@@ -1,5 +1,3 @@
-![Snappg](https://photos-5.dropbox.com/t/2/AABORKnXKLAnlrPz4gpsRWeHvgAObcRdXJFFjLoEVXtL5A/12/104872952/png/32x32/1/_/1/2/snappg_logo.fw.png/EO2VmFEY3vYDIAcoBw/woxO9TE6oeSmg6rCE8nzaojJpOrh24G4kpVkuHHmSE0?size=1024x768&size_mode=2)
-
 ### Introduction
 When we work with some ORM's, we need objects that represent our database within the project. The Snappg was born in order to simplify the generation of these files known as Plain Old CLR Object.
 
