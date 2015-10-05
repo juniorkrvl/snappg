@@ -142,13 +142,10 @@ You can download a package here or clone the repository and build for your own. 
     ]
   }</pre></div>
 
-<p><strong>Path</strong>: Path to save your generated files.</p>
-
-<p><strong>Namespace</strong>: Namespace of genereted classes.</p>
-
-<p><strong>Project</strong>: Path to .csproj file. This option is for inserting files into your project file automatically. With this, you will not need to add manually through the menu &gt; 'Include In Project'.</p>
-
-<p><strong>Ignores</strong>: Here you place an array of string with the names of the tables that will not use. Snappg will ignore these tables and if you have previously generated, they will be erased.</p>
+<p><strong>Path</strong>: Path to save your generated files.<br>
+<strong>Namespace</strong>: Namespace of genereted classes.<br>
+<strong>Project</strong>: Path to .csproj file. This option is for inserting files into your project file automatically. With this, you will not need to add manually through the menu &gt; 'Include In Project'.<br>
+<strong>Ignores</strong>: Here you place an array of string with the names of the tables that will not use. Snappg will ignore these tables and if you have previously generated, they will be erased.  </p>
 
 <h4>
 <a id="pocos-configuration" class="anchor" href="#pocos-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pocos Configuration</h4>
@@ -171,9 +168,9 @@ You can download a package here or clone the repository and build for your own. 
 
 <p>Here you put the details of your files.</p>
 
-<p><strong>Imports</strong>: Place all imports your project needs.
-<strong>Sulfix</strong>: Place a sulfix to table name into POCO class name. Example: Table-&gt; User, Class-&gt; UserPoco
-<strong>Prefix</strong>: Place a prefix to table name into POCO class name. Example: Table-&gt; User, Class-&gt; TbUser</p>
+<p><strong>Imports</strong>: Place all imports your project needs.<br>
+<strong>Sulfix</strong>: Place a sulfix to table name into POCO class name. Example: Table-&gt; User, Class-&gt; UserPoco.<br>
+<strong>Prefix</strong>: Place a prefix to table name into POCO class name. Example: Table-&gt; User, Class-&gt; TbUser.  </p>
 
 <h5>
 <a id="attributes-configuration" class="anchor" href="#attributes-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes Configuration</h5>
@@ -188,6 +185,29 @@ You can download a package here or clone the repository and build for your own. 
     <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
 }</pre></div>
 
+<p><strong>Variables</strong>: Inside of PK configuration you can use these variables:</p>
+
+<p><strong>$table$</strong>:This will be for the table name.<br>
+<strong>$database$</strong>:This will be for the database name.<br>
+<strong>$pk$</strong>:This will be for the primary key name.  </p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[PrimaryKey(<span class="pl-cce">\"</span>$database$.$table$.$pk$<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>]
+    },</pre></div>
+
+<p>Will produce:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">User</span>{
+    [PrimaryKey(<span class="pl-s"><span class="pl-pds">"</span>TestDatabase.User.Id<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
 <p><strong>FK</strong>: Here you place an array of strings that indicates the attributes that you want the properties representing ForeignKeys should have.</p>
 
 <p>Example:</p>
@@ -196,6 +216,31 @@ You can download a package here or clone the repository and build for your own. 
     [Key]
     <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
     [ForeignKey]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<p><strong>Variables</strong>: Inside of FK configuration you can use these variables:</p>
+
+<p><strong>$table$</strong>:This will be for the table name.<br>
+<strong>$database$</strong>:This will be for the database name.<br>
+<strong>$fk$</strong>:This will be for the foreign key name.  </p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[FK(<span class="pl-cce">\"</span>$database$.$table$.$fk$<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>]
+    },</pre></div>
+
+<p>Will produce:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">ProductItem</span>{
+    [Key]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    [FK(<span class="pl-s"><span class="pl-pds">"</span>TestDatabase.ProductItem.ProductId<span class="pl-pds">"</span></span>)]
     <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
     <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
 }</pre></div>
@@ -213,6 +258,69 @@ You can download a package here or clone the repository and build for your own. 
     <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
     [Column]
     <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<p><strong>Variables</strong>: Inside of column configuration you can use these variables:</p>
+
+<p><strong>$table$</strong>:This will be for the table name.<br>
+<strong>$database$</strong>:This will be for the database name.<br>
+<strong>$column$</strong>:This will be for the column name.  </p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>Column(<span class="pl-cce">\"</span>$column$<span class="pl-cce">\"</span>)<span class="pl-pds">"</span></span>]
+    },</pre></div>
+
+<p>Will produce:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">ProductItem</span>{
+    [Column(<span class="pl-s"><span class="pl-pds">"</span>Id<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    [Column(<span class="pl-s"><span class="pl-pds">"</span>ProductId <span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    [Column(<span class="pl-s"><span class="pl-pds">"</span>Name <span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<p><strong>Table</strong>: Here you place an array of strings that indicates the attributes that class representing a table should have.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-cs"><pre>[Table]
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">User</span>{
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">ProductId</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Name</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+}</pre></div>
+
+<p><strong>Variables</strong>: Inside of table configuration you can use these variables:</p>
+
+<p><strong>$table$</strong>:This will be for the table name.<br>
+<strong>$database$</strong>:This will be for the database name.<br>
+<strong>$pks$</strong>:This will list all primary keys of table separated with commas.<br>
+<strong>$fks$</strong>:This will list all foreign keys of table separated with commas.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>attributes<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>fk<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>[Table(<span class="pl-cce">\"</span>$database$.$table$<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>[PrimaryKey(<span class="pl-cce">\"</span>$pks$<span class="pl-cce">\"</span>)]<span class="pl-pds">"</span></span>],
+      <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>]
+    },</pre></div>
+
+<p>Will produce:</p>
+
+<div class="highlight highlight-source-cs"><pre>[Table(<span class="pl-s"><span class="pl-pds">"</span>User<span class="pl-pds">"</span></span>)]
+[PrimaryKey(<span class="pl-s"><span class="pl-pds">"</span>Id<span class="pl-pds">"</span></span>)]
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">User</span>{
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">Id</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">FirstName</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">LastName</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>;}
 }</pre></div>
 
 <h5>
