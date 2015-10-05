@@ -99,13 +99,10 @@ In this block, you will configure all database informations. For provider option
   }
 ```
 
-**Path**: Path to save your generated files.
-
-**Namespace**: Namespace of genereted classes.
-
-**Project**: Path to .csproj file. This option is for inserting files into your project file automatically. With this, you will not need to add manually through the menu > 'Include In Project'.
-
-**Ignores**: Here you place an array of string with the names of the tables that will not use. Snappg will ignore these tables and if you have previously generated, they will be erased.
+**Path**: Path to save your generated files.  
+**Namespace**: Namespace of genereted classes.  
+**Project**: Path to .csproj file. This option is for inserting files into your project file automatically. With this, you will not need to add manually through the menu > 'Include In Project'.  
+**Ignores**: Here you place an array of string with the names of the tables that will not use. Snappg will ignore these tables and if you have previously generated, they will be erased.  
 
 #### Pocos Configuration
 
@@ -129,9 +126,9 @@ In this block, you will configure all database informations. For provider option
 
 Here you put the details of your files.
 
-**Imports**: Place all imports your project needs.
-**Sulfix**: Place a sulfix to table name into POCO class name. Example: Table-> User, Class-> UserPoco
-**Prefix**: Place a prefix to table name into POCO class name. Example: Table-> User, Class-> TbUser
+**Imports**: Place all imports your project needs.  
+**Sulfix**: Place a sulfix to table name into POCO class name. Example: Table-> User, Class-> UserPoco.  
+**Prefix**: Place a prefix to table name into POCO class name. Example: Table-> User, Class-> TbUser.  
 
 ##### Attributes Configuration
 
@@ -146,6 +143,34 @@ public class User{
 }
 ```
 
+**Variables**: Inside of PK configuration you can use these variables:
+
+**$table$**:This will be for the table name.  
+**$database$**:This will be for the database name.  
+**$pk$**:This will be for the primary key name.  
+
+Example:
+
+```json
+"attributes": {
+      "pk": ["[PrimaryKey(\"$database$.$table$.$pk$\")]"],
+      "fk": [""],
+      "table": [""],
+      "columns": [""]
+    },
+```
+
+Will produce:
+
+```c#
+public class User{
+    [PrimaryKey("TestDatabase.User.Id")]
+    public int Id { get; set;}
+    public string Name { get; set;}
+}
+```
+
+
 **FK**: Here you place an array of strings that indicates the attributes that you want the properties representing ForeignKeys should have.
 
 Example:
@@ -154,6 +179,35 @@ public class ProductItem{
     [Key]
     public int Id { get; set;}
     [ForeignKey]
+    public int ProductId { get; set;}
+    public string Name { get; set;}
+}
+```
+
+**Variables**: Inside of FK configuration you can use these variables:
+
+**$table$**:This will be for the table name.  
+**$database$**:This will be for the database name.  
+**$fk$**:This will be for the foreign key name.  
+
+Example:
+
+```json
+"attributes": {
+      "pk": [""],
+      "fk": ["[FK(\"$database$.$table$.$fk$\")]"],
+      "table": [""],
+      "columns": [""]
+    },
+```
+
+Will produce:
+
+```c#
+public class ProductItem{
+    [Key]
+    public int Id { get; set;}
+    [FK("TestDatabase.ProductItem.ProductId")]
     public int ProductId { get; set;}
     public string Name { get; set;}
 }
@@ -172,6 +226,78 @@ public class ProductItem{
     public int ProductId { get; set;}
     [Column]
     public string Name { get; set;}
+}
+```
+
+**Variables**: Inside of column configuration you can use these variables:
+
+**$table$**:This will be for the table name.  
+**$database$**:This will be for the database name.  
+**$column$**:This will be for the column name.  
+
+Example:
+
+```json
+"attributes": {
+      "pk": [""],
+      "fk": [""],
+      "table": [""],
+      "columns": ["Column(\"$column$\")"]
+    },
+```
+
+Will produce:
+
+```c#
+public class ProductItem{
+    [Column("Id")]
+    public int Id { get; set;}
+    [Column("ProductId ")]
+    public int ProductId { get; set;}
+    [Column("Name ")]
+    public string Name { get; set;}
+}
+```
+
+**Table**: Here you place an array of strings that indicates the attributes that class representing a table should have.
+
+Example:
+```c#
+[Table]
+public class User{
+    public int Id { get; set;}
+    public int ProductId { get; set;}
+    public string Name { get; set;}
+}
+```
+
+**Variables**: Inside of table configuration you can use these variables:
+
+**$table$**:This will be for the table name.  
+**$database$**:This will be for the database name.  
+**$pks$**:This will list all primary keys of table separated with commas.  
+**$fks$**:This will list all foreign keys of table separated with commas.
+
+Example:
+
+```json
+"attributes": {
+      "pk": [""],
+      "fk": [""],
+      "table": ["[Table(\"$database$.$table$\")]","[PrimaryKey(\"$pks$\")]"],
+      "columns": [""]
+    },
+```
+
+Will produce:
+
+```c#
+[Table("User")]
+[PrimaryKey("Id")]
+public class User{
+    public int Id { get; set;}
+    public string FirstName { get; set;}
+    public string LastName { get; set;}
 }
 ```
 
