@@ -34,17 +34,26 @@ namespace Snappg.Providers.MySql
                     cBase.Name = row["TABLE_NAME"].ToString();
                     Console.WriteLine("Retrieving " + cBase.Name + "...");
 
-                    DataTable mult = this._base.GetMultRelationship(cBase.Name);
-                    foreach (DataRow item in mult.Rows)
+                    if (Configurator.Config.Pocos.Relations.OneToMany != null && Configurator.Config.Pocos.Relations.OneToMany == true)
                     {
-                        cBase.MultRelationships.Add(item["Child Table"].ToString());
+                        DataTable mult = this._base.GetMultRelationship(cBase.Name);
+                        foreach (DataRow item in mult.Rows)
+                        {
+                            cBase.MultRelationships.Add(item["Child Table"].ToString());
+                        }
                     }
 
-                    DataTable singl = this._base.GetSingleRelationship(cBase.Name);
-                    foreach (DataRow item in singl.Rows)
+                    if (Configurator.Config.Pocos.Relations.OneToOne != null && Configurator.Config.Pocos.Relations.OneToOne == true)
                     {
-                        cBase.SingleRelationships.Add(item["Parent Table"].ToString());
+                        DataTable singl = this._base.GetSingleRelationship(cBase.Name);
+                        foreach (DataRow item in singl.Rows)
+                        {
+                            cBase.SingleRelationships.Add(item["Parent Table"].ToString());
+                        }
                     }
+
+                    List<string> PrimaryKeys = new List<string>();
+                    List<string> ForeignKeys = new List<string>();
 
                     DataTable columns = this._base.GetColumns(cBase.Name);
                     foreach (DataRow column in columns.Rows)
@@ -57,12 +66,96 @@ namespace Snappg.Providers.MySql
                         DataTable keys = this._base.GetKey(cBase.Name, pBase.Name);
                         if (keys.Rows.Count > 0)
                         {
-                            DataRow fk = keys.Rows[0];
-                            PrimaryKey attr = new PrimaryKey();
-                            pBase.Attribute = attr;
+                            PrimaryKeys.Add(pBase.Name);
+                            string attribute = "";
+                            if (Configurator.Config.Pocos.Attributes.PK != null)
+                            {
+                                foreach (var pk in Configurator.Config.Pocos.Attributes.PK)
+                                {
+                                    if (!pk.Trim().Equals(String.Empty))
+                                    {
+                                        string compiled = "";
+                                        compiled = pk.Replace("$database$", Configurator.Config.Database.Name);
+                                        compiled = compiled.Replace("$table$", cBase.Name);
+                                        compiled = compiled.Replace("$pk$", pBase.Name);
+                                        attribute += compiled + "\r\n";
+                                    }
+                                }
+                            }
+                            if (attribute.Length > 0)
+                            {
+                                AttributeBase pkAttr = new AttributeBase();
+                                pkAttr.Attribute = attribute;
+                                pBase.Attributes.Add(pkAttr);
+                            }
+                        }
+
+                        DataTable fkeys = _base.GetForeingKey(cBase.Name, pBase.Name);
+                        if (fkeys.Rows.Count > 0)
+                        {
+                            ForeignKeys.Add(pBase.Name);
+                            string attribute = "";
+                            if (Configurator.Config.Pocos.Attributes.FK != null)
+                            {
+                                foreach (var fk in Configurator.Config.Pocos.Attributes.FK)
+                                {
+                                    if (!fk.Trim().Equals(String.Empty))
+                                    {
+                                        string compiled = "";
+                                        compiled = fk.Replace("$database$", Configurator.Config.Database.Name);
+                                        compiled = compiled.Replace("$table$", cBase.Name);
+                                        compiled = compiled.Replace("$fk$", pBase.Name);
+                                        attribute += compiled + "\r\n";
+                                    }
+                                }
+                            }
+                            if (attribute.Length > 0)
+                            {
+                                AttributeBase fkAttr = new AttributeBase();
+                                fkAttr.Attribute = attribute;
+                                pBase.Attributes.Add(fkAttr);
+                            }
+                        }
+
+                        if (Configurator.Config.Pocos.Attributes.Columns != null)
+                        {
+                            string attrCols = "";
+                            foreach (var col in Configurator.Config.Pocos.Attributes.Columns)
+                            {
+                                if (!col.Trim().Equals(String.Empty))
+                                {
+                                    string compiled = "";
+                                    compiled = col.Replace("$database$", Configurator.Config.Database.Name);
+                                    compiled = compiled.Replace("$table$", cBase.Name);
+                                    compiled = compiled.Replace("$column$", pBase.Name);
+                                    attrCols += compiled + "\r\n";
+                                }
+                            }
+                            if (attrCols.Length > 0)
+                            {
+                                AttributeBase pkAttr = new AttributeBase();
+                                pkAttr.Attribute = attrCols;
+                                pBase.Attributes.Add(pkAttr);
+                            }
                         }
 
                         cBase.Properties.Add(pBase);
+                    }
+
+                    string tableAttr = "";
+                    if (Configurator.Config.Pocos.Attributes.Table != null)
+                    {
+                        foreach (var t in Configurator.Config.Pocos.Attributes.Table)
+                        {
+                            string compiled = "";
+                            compiled = t.Replace("$database$", Configurator.Config.Database.Name);
+                            compiled = compiled.Replace("$table$", cBase.Name);
+                            compiled = compiled.Replace("$fks$", string.Join(",", ForeignKeys.ToArray()));
+                            compiled = compiled.Replace("$pks$", string.Join(",", PrimaryKeys.ToArray()));
+
+                            tableAttr += compiled + "\r\n";
+                        }
+                        cBase.Attributes = tableAttr;
                     }
 
                     list.Add(cBase);

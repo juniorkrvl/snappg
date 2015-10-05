@@ -94,6 +94,10 @@ namespace Snappg.Creator
             try
             {
                 StringBuilder sb = new StringBuilder();
+                if (!this.Attributes.Trim().Equals(String.Empty))
+                {
+                    sb.Append(this.Attributes);
+                }
                 sb.AppendLine(string.Format("public class {0}", this.Name));
                 sb.AppendLine("{");
                 foreach (var line in BuildProperties().Split(new char[] { '\n' }, StringSplitOptions.None))
@@ -121,9 +125,13 @@ namespace Snappg.Creator
 
                 foreach (var property in this.Properties)
                 {
-                    if (property.Attribute != null)
+                    if (property.Attributes != null)
                     {
-                        sb.AppendLine(property.Attribute.ToString());
+                        foreach (var a in property.Attributes)
+                        {
+                            sb.Append(a.Attribute);
+                        }
+                        //sb.AppendLine(property.Attribute.ToString());
                     }
                     sb.AppendLine(string.Format("public {0} {1} {{ get; set; }}", MySqlTypes.GetType(property.Type, property.Nullable), property.Name));
                 }

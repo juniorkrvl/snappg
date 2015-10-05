@@ -45,11 +45,12 @@ namespace Snappg.Core
         public string[] PK { get; set; }
         public string[] FK { get; set; }
         public string[] Table { get; set; }
+        public string[] Columns { get; set; }
     }
 
     public class Relations
     {
-        public bool OneToOne { get; set; }
-        public bool OneToMany { get; set; }
+        public bool? OneToOne { get; set; }
+        public bool? OneToMany { get; set; }
     }
 }

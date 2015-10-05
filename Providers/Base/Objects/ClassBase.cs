@@ -10,6 +10,7 @@ namespace Snappg.Providers.Base.Objects
     {
         public string Namespace { get; set; }
         public string Name { get; set; }
+        public string Attributes { get; set; }
         public List<PropertyBase> Properties { get; set; }
 
         public ClassBase()
